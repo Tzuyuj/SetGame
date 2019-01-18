@@ -6,6 +6,6 @@ Team Members:
 * Akul Gulrajani
 * Rachelle Magaram
 * Bright Zhou
-* Matt Nehez
+* Matthew Nehez
 
 
