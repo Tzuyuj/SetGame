@@ -2,6 +2,8 @@
 #could the cards be structs? unions? or something else?
 
 #header of some kind
+#require 'card.rb'
+
 int num_cards_dealt = 0;
 
 while(nums_card_dealt < 12) {
