@@ -8,16 +8,11 @@
 
 class card 
 
-#Generate array of size 81
-
-	def initialize
-		@array=*(0..80)	
-	end
 
 
 
 #This will determine the shape by taking the card number Mod 3. 0 == "CIRCLE", 1 == "DIAMOND", 2 == "SQUIGGLE"
-	def shape x
+	def shape (x)   
 		value = x % 3
 
 		if value == 0
@@ -30,7 +25,7 @@ class card
 	end
 
 #This will determine the fill by taking the card number Mod 9, and checking the range. 0-2 == "SOLID", 3-5 == "STRIPED", 6-8 =="EMPTY"
-	def fill x
+	def fill (x) 
 		value = x % 9
 
 		if value.between(0,2)
@@ -45,18 +40,18 @@ class card
 	end
 
 #This checks to see what range the card number is in, and determines color based on numbering. 
-	def color x 
-		if value.between(0,8) or value.between(27,35) or value.between(54-62)
+	def color (x) 
+		if x.between(0,8) or x.between(27,35) or x.between(54-62)
 			color = "WHITE"
-		elsif value.between(9,17) or value.between(36,44) or value.between 63-71)
+		elsif x.between(9,17) or x.between(36,44) or x.between(63-71)
 			color = "RED"
-		elsif value.between(18,26) or value.between(45,53) or value.between(72,80)
+		elsif x.between(18,26) or x.between(45,53) or x.between(72,80)
 			color = "BLUE"
 		end
 	end
 
 #This checks how many shapes will appear on screen. If the card number is 0-26 == 1, 27-53 == 2, 54-80 == 3
-	def number x
+	def number (x)  
 		if x.between(0,26)
 			number = 1
 		elsif x.between(27,53)
