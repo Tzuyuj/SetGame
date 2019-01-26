@@ -1,17 +1,12 @@
-#Author: Matthew Nehez
+# Author: Matthew Nehez
 
 # This creates a deck of 81 cards for the game SET
 # it also does the calculations to determine the attributes of each card to make sure each card in the game is represented
-#INSTRUCTIONS: All attributes are determined by the number of the card. 
-
-
+# INSTRUCTIONS: All attributes are determined by the number of the card. 
 
 class card 
 
-
-
-
-#This will determine the shape by taking the card number Mod 3. 0 == "CIRCLE", 1 == "DIAMOND", 2 == "SQUIGGLE"
+# This will determine the shape by taking the card number Mod 3. 0 == "CIRCLE", 1 == "DIAMOND", 2 == "SQUIGGLE"
 	def shape (x)   
 		value = x % 3
 
@@ -24,7 +19,7 @@ class card
 		end	
 	end
 
-#This will determine the fill by taking the card number Mod 9, and checking the range. 0-2 == "SOLID", 3-5 == "STRIPED", 6-8 =="EMPTY"
+# This will determine the fill by taking the card number Mod 9, and checking the range. 0-2 == "SOLID", 3-5 == "STRIPED", 6-8 =="EMPTY"
 	def fill (x) 
 		value = x % 9
 
@@ -39,7 +34,7 @@ class card
 	
 	end
 
-#This checks to see what range the card number is in, and determines color based on numbering. 
+# This checks to see what range the card number is in, and determines color based on numbering. 
 	def color (x) 
 		if x.between(0,8) or x.between(27,35) or x.between(54-62)
 			color = "WHITE"
@@ -50,7 +45,7 @@ class card
 		end
 	end
 
-#This checks how many shapes will appear on screen. If the card number is 0-26 == 1, 27-53 == 2, 54-80 == 3
+# This checks how many shapes will appear on screen. If the card number is 0-26 == 1, 27-53 == 2, 54-80 == 3
 	def number (x)  
 		if x.between(0,26)
 			number = 1

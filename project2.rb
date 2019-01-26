@@ -1,37 +1,39 @@
-#need to make 81 unique cards; each card has a color, number, shape, and shading (+selected/not)
-#could the cards be structs? unions? or something else? class?
-require 'card.rb';
-#header of some kind?
-num_cards_dealt = 0;
-card1 = card.new;
-card2 = card.new;
-card3 = card.new;
+# Authors: Rachelle Magaram and Akul Gulrajani
 
-int play = 0;
-#boolean playingGame = true;
-while play <= 19 #play 20 rounds
-	while num_cards_dealt < 12  && play % 2 == 0
-	 #deal cards
+require 'card'
+require 'deck'
+
+play = 0
+#playingGame = true
+D = deck.new
+D.initialize
+user_cards = []
+
+# deal cards here
+while user_cards.length < 12 and play % 2 == 0
+	user_cards[user_cards.length] = D.push
+end
+
+# display the cards
+display(user_cards)
+
+while play <= 19 # play 20 rounds
+	puts 'Choose a card from the 12 above: '
+	card1 = gets
+	puts 'Choose another card: '
+	card2 = gets
+	puts 'Choose another card: '
+	card3 = gets
+	if check(card1,card2,card3)
+		# cards pass the check
+		user_cards[card1] = D.push
+		user_cards[card2] = D.push
+		user_cards[card3] = D.push
 	end
-	play++;
-	user_cards = 0;
-	#while user_cards < 3 
-	if play % 2 != 0
-		puts 'Choose a card by entering a number from 0 to 80: ';
-		#"gets" is the command for user input
-		input = gets;
-		card1 = Card.new(input);
-		puts 'Choose another card by entering a different number from 0 to 80: ';
-		input = gets;
-		card2 = Card.new(input);
-		puts 'Choose another card by entering a different number from 0 to 80: ';
-		input = gets;
-		card3 = Card.new(input);
-	end
+	play += 1
 end
 
 
-booleanNumber = false, booleanSymbol = false, booleanShading = false, booleanColor = false;
 =begin
 	4 groups of conditions, all of which must be satisfied!
 	group 1: They all have the same number or have three different numbers.
@@ -39,34 +41,52 @@ booleanNumber = false, booleanSymbol = false, booleanShading = false, booleanCol
 	group 2: They all have the same symbol or have three different symbols.
 	group 3: They all have the same shading or have three different shadings.
 	group 4: They all have the same color or have three different colors.
-	make a boolean variable for each group; test each group separately
-	make elaborate if(group1 && group2 && group3 && group4) test at the end line 35
+	make a boolean variable for each group test each group separately
+	make elaborate if(group1 and group2 and group3 and group4) test at the end line 35
 	if set -> return "it's a set" and go back to loop of dealing cards
 	if not set -> return "not a set" and deselect user's cards, go back to user selection loop
 	parenthesis for multiple conditions
 =end
-if((card1.number==card2.number && card2.number==card3.number) || (card1.number!=card2.number && card1.number!=card3.number && card2.number!=card3.number))
-	booleanNumber = true;
-end
-if(card1.shape.equals(card2.shape) && card2.shape.equals(card3.shape)) || (!card1.shape.equals(card2.shape) && !card1.shape.equals(card3.shape) && !card2.shape.equals(card3.shape))
-	booleanSymbol = true;
-end
-if(card1.fill.equals(card2.fill) && card2.fill.equals(card3.fill)) || (!card1.fill.equals(card2.fill) && !card1.fill.equals(card3.fill) && !card2.fill.equals(card3.fill))
-	booleanShading = true;
-end
-if(card1.color.equals(card2.color) && card2.color.equals(card3.color)) || (!card1.color.equals(card2.color) && !card1.color.equals(card3.color) && !card2.color.equals(card3.color))
-	booleanColor = true;
+# checks user input for whether or not they match the rules above
+def check (cardOne, cardTwo, cardThree)
+	card1 = user_cards[cardOne]
+	card2 = user_cards[cardTwo]
+	card3 = user_cards[cardThree]
+	booleanNumber = false, booleanSymbol = false, booleanShading = false, booleanColor = false
+	if ((card1.number == card2.number and card2.number == card3.number) || (card1.number != card2.number and card1.number != card3.number and card2.number != card3.number))
+		booleanNumber = true
+	end
+	if ((card1.shape == card2.shape and card2.shape == card3.shape) || (card1.shape != card2.shape and card1.shape != card3.shape and card2.shape != card3.shape))
+		booleanSymbol = true
+	end
+	if ((card1.fill == card2.fill and card2.fill == card3.fill) || (card1.fill != card2.fill and card1.fill != card3.fill and card2.fill != card3.fill))
+		booleanShading = true
+	end
+	if ((card1.color == card2.color and card2.color == card3.color) || (card1.color != card2.color and card1.color != card3.color and card2.color != card3.color))
+		booleanColor = true
+	end
+
+	if booleanNumber and booleanColor and booleanShading and booleanSymbol
+		puts 'You have a set.'
+		check = true
+	else
+		puts 'This is not a set.'
+		check = false
+	end
 end
 
-if booleanNumber && booleanColor && booleanShading && booleanSymbol
-	puts 'You have a set.';
-	play++;
-	#go back to loop of dealing cards
-else
-	puts 'This is not a set.';
-	#go back to user selection loop
+def display (user_cards)
+	index = 0
+	while index < user_cards.length
+		print "card #{index}: "
+		print "#{card.shape(user_cards[index])},"
+		print "#{card.fill(user_cards[index])},"
+		print "#{card.color(user_cards[index])},"
+		print "#{card.number(user_cards[index])}\n"
+		index += 1
+	end
 end
 
-#playingGame = false; #or should be infinite loop?
+#playingGame = false #or should be infinite loop?
 
 
