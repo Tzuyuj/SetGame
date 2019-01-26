@@ -4,7 +4,7 @@
 # it also does the calculations to determine the attributes of each card to make sure each card in the game is represented
 # INSTRUCTIONS: All attributes are determined by the number of the card. 
 
-class card 
+class Card
 
 # This will determine the shape by taking the card number Mod 3. 0 == "CIRCLE", 1 == "DIAMOND", 2 == "SQUIGGLE"
 	def shape (x)   
@@ -27,7 +27,7 @@ class card
 			fill = "SOLID"
 		elsif value.between(3,5)
 			fill = "STRIPED"
-		elsif value.between (6,8)
+		elsif value.between(6,8)
 			fill = "EMPTY" 
 
 		end
