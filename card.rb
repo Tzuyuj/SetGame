@@ -49,7 +49,7 @@ class Card
 
   # This checks how many shapes will appear on screen.
   # If the card number is 0-26 == 1, 27-53 == 2, 54-80 == 3
-  def boolean_number(card_value)
+  def number(card_value)
     if card_value.between?(0, 26)
       '1'
     elsif card_value.between?(27, 53)

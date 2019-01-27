@@ -51,9 +51,14 @@ class Rules
     (@card.color(two) != @card.color(three)))
 
     if boolean_number && boolean_color && boolean_shading && boolean_symbol
-      puts 'You have a set.\n'
+      puts "\n" + 'You have a set.' + "\n\n"
     else
-      puts 'This is not a set.\n'
+      puts "\n" + 'This is not a set.' + "\n\n"
     end
+  end
+
+  # checks to see if there are no possible sets in the user's 12 cards
+  def no_set(user_cards)
+    check(user_cards, user_cards[0], user_cards[1], user_cards[2])
   end
 end

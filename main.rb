@@ -6,7 +6,7 @@ require_relative 'rules'
 deck_of_cards = Deck.new
 rules = Rules.new
 user_cards = []
-play = 0
+play = true
 points = 0
 # playerOnePoints = 0
 # playerTwoPoints = 0
@@ -15,31 +15,51 @@ points = 0
 user_cards[user_cards.length] = deck_of_cards.push while user_cards.length < 12
 
 # start game loops here
-while play <= 19 # play 20 rounds
+while play
   # display the cards
   rules.display(user_cards)
-  puts 'Choose a card from the 12 above: '
-  card1 = gets
-  card1 = card1.to_i
+  puts "\n" + 'Choose a card from the 12 above: '
+  loop do
+    card_one = gets
+    card_one = card_one.to_i
+    unless card_one.between?(0, 12)
+      valid_input = false
+      puts 'Invalid input, please choose a valid card: '
+    end
+    break if valid_input
+  end
   puts 'Choose another card: '
-  card2 = gets
-  card2 = card2.to_i
-  puts 'Choose another card: '
-  card3 = gets
-  card3 = card3.to_i
-  if rules.check(user_cards, card1, card2, card3)
+  loop do
+    card_two = gets
+    card_two = card_two.to_i
+    unless card_two.between?(0, 12)
+      valid_input = false
+      puts 'Invalid input, please choose a valid card: '
+    end
+    break if valid_input
+  end
+  puts 'Choose another card'
+  loop do
+    card_three = gets
+    card_three = card_three.to_i
+    unless card_three.between?(0, 12)
+      valid_input = false
+      puts 'Invalid input, please choose a valid card: '
+    end
+    break if valid_input
+  end
+  if rules.check(user_cards, card_one, card_two, card_three)
     # cards pass the check, so they have to be replaced
-    user_cards[card1] = deck_of_cards.push
-    user_cards[card2] = deck_of_cards.push
-    user_cards[card3] = deck_of_cards.push
-
-    # adjust point totals here
+    # check if there are enough cards to replace them
+    if 81 - deck_of_cards.index < 3
+      user_cards[card_one] = deck_of_cards.push
+      user_cards[card_two] = deck_of_cards.push
+      user_cards[card_three] = deck_of_cards.push
+      play = false
+    end
     points += 1
   else
-    # adjust point totals here
     points -= 1
   end
-  play += 1
-  # add check for no sets here
-  # noSet
+  # check if no sets are possible
 end
