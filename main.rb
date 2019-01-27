@@ -10,6 +10,7 @@ play = true
 points = 0
 # playerOnePoints = 0
 # playerTwoPoints = 0
+#
 
 # deal cards here
 user_cards[user_cards.length] = deck_of_cards.push while user_cards.length < 12
