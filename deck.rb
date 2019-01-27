@@ -1,3 +1,4 @@
+# Author: Akul Gulrajani and Matt Nehez and Bright Zhou
 require_relative 'card'
 
 # This class creates an array representation of a deck of cards

@@ -1,4 +1,4 @@
-# Authors: Rachelle Magaram and Akul Gulrajani
+# Authors: Rachelle Magaram and Akul Gulrajani and Bright Zhou
 
 require_relative 'card'
 require_relative 'deck'
