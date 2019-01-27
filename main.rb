@@ -20,7 +20,7 @@ while play
   valid_input = true
   puts "\n" + 'Choose a card from the 12 above: '
   loop do
-    card_one = '5'
+    card_one = gets
     card_one = card_one.to_i - 1
     unless card_one.between?(0, 11)
       valid_input = false
@@ -31,7 +31,7 @@ while play
   card_one = user_cards[card_one]
   puts 'Choose another card: '
   loop do
-    card_two = '3'
+    card_two = gets
     card_two = card_two.to_i - 1
     unless card_two.between?(0, 11)
       valid_input = false
@@ -42,7 +42,7 @@ while play
   card_two = user_cards[card_two]
   puts 'Choose another card'
   loop do
-    card_three = '9'
+    card_three = gets
     card_three = card_three.to_i - 1
     unless card_three.between?(0, 11)
       valid_input = false
