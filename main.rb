@@ -8,6 +8,7 @@ play = true
 points = 0
 # playerOnePoints = 0
 # playerTwoPoints = 0
+#
 
 # deal cards here
 user_cards = deck_of_cards.deal(12)
