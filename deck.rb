@@ -70,4 +70,44 @@ class Deck
     card_three = Card.new(card_three_color, card_three_number,
                           card_three_fill, card_three_shape)
   end
+
+
+#method for checking if there is a set in the user_cards array
+
+def set_exist(user_cards)
+ retVal=false
+ card1=nil
+  card2=nil
+   card3=nil
+
+while a.length!=0
+card1=a.shift
+ i=0
+    while a[i]
+      j=i+1
+            while a[j]
+              card2=a[i]
+              card3=a[j]
+              boo1=card1!=nil && card2!=nil && card3!=nil
+              #puts "card1:#{card1} card2:#{card2} card3:#{card3}"
+              
+                  if boo1
+                      
+                      boo2=(card1==check(card2,card3))
+                        if boo2==true
+                        return true
+                        end
+                  end
+                        j+=1
+                    
+              end
+              
+              i+=1
+        end
+    
+
+end
+        retVal
+end
+
 end

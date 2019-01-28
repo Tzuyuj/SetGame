@@ -54,6 +54,9 @@ while play
     break if valid_input
   end
   card_three = user_cards[card_three]
+
+
+
   # perform card check (the check method returns the correct third
   # card and then compares it to the user's third card)
   if card_three == deck_of_cards.check(card_one, card_two)
@@ -73,6 +76,13 @@ while play
   else
     puts 'That is not a set, you lose a point!'
     points -= 1
-  end
+  end]
+
+
   # check if no sets are possible
+if !deck_of_cards.set_exist[user_cards]
+#add cards
+end
+
+
 end
