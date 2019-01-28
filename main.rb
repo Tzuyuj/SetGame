@@ -17,6 +17,9 @@ card_three = nil
 
 # start game loops here
 while play
+
+  
+
   valid_input = true
   # get first card of user input
   puts "\n" + 'Choose a card from the 12 above: '
@@ -109,11 +112,19 @@ while play
    end
   end
 
-
-  # check if no sets are possible
+  # check if no sets are possible at first place
 if !deck_of_cards.set_exist[user_cards]
 #add cards
+deck_of_cards.deal(3)
 end
 
-
 end
+
+#announce the winner
+if playerOnePoints>playerTwoPoints
+   puts "player 1, you win!"
+elsif playerOnePoints<playerTwoPoints
+    puts "player 2, you win!"
+else
+     puts "That is a tie!"
+end 
