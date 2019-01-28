@@ -71,43 +71,32 @@ class Deck
                           card_three_fill, card_three_shape)
   end
 
-
-#method for checking if there is a set in the user_cards array
-
-def set_exist(user_cards)
- retVal=false
- card1=nil
-  card2=nil
-   card3=nil
-
-while a.length!=0
-card1=a.shift
- i=0
-    while a[i]
-      j=i+1
-            while a[j]
-              card2=a[i]
-              card3=a[j]
-              boo1=card1!=nil && card2!=nil && card3!=nil
-              #puts "card1:#{card1} card2:#{card2} card3:#{card3}"
-              
-                  if boo1
-                      
-                      boo2=(card1==check(card2,card3))
-                        if boo2==true
-                        return true
-                        end
-                  end
-                        j+=1
-                    
-              end
-              
-              i+=1
+  # method for checking if there is a set in the user_cards array
+  def set?(user_cards)
+    ret_value = false
+    card1 = nil
+    card2 = nil
+    card3 = nil
+    a = []
+    while a.length.empty?
+      card1 = a.shift
+      i = 0
+      while a[i]
+        j = i + 1
+        while a[j]
+          card2 = a[i]
+          card3 = a[j]
+          boo1 = (card1.nil? && card2.nil? && card3.nil?)
+          # puts "card1:#{card1} card2:#{card2} card3:#{card3}"
+          if boo1
+            boo2 = (card1 == check(card2, card3))
+            return boo2
+          end
+          j += 1
         end
-    
-
-end
-        return retVal
-end
-
+        i += 1
+      end
+    end
+    ret_value
+  end
 end
