@@ -107,7 +107,7 @@ card1=a.shift
     
 
 end
-        retVal
+        return retVal
 end
 
 end
