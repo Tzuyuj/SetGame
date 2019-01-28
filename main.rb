@@ -5,9 +5,9 @@ require_relative 'deck'
 
 deck_of_cards = Deck.new
 play = true
-points = 0
-# playerOnePoints = 0
-# playerTwoPoints = 0
+
+playerOnePoints = 0
+playerTwoPoints = 0
 
 # deal cards here
 user_cards = deck_of_cards.deal(12)
@@ -61,7 +61,24 @@ while play
   # card and then compares it to the user's third card)
   if card_three == deck_of_cards.check(card_one, card_two)
     puts 'That is a set, you get a point!'
-    points += 1
+
+   
+   
+ puts "who wins the point? Type in 1 or 2:"
+    score=gets
+    loop do
+    if score.to_i==1
+        playerOnePoints+=1
+        break
+    elsif score.to_i==2
+        playerTwoPoints+=1
+        break
+    else
+        puts "retype 1 or 2:"
+        score=gets
+    end
+   end
+
     # cards pass the check, so they have to be replaced
     # check if there are enough cards to replace them,
     # otherwise the game ends
@@ -75,8 +92,22 @@ while play
     end
   else
     puts 'That is not a set, you lose a point!'
-    points -= 1
-  end]
+     
+ puts "who loses the point? Type in 1 or 2:"
+    score=gets
+    loop do
+    if score.to_i==1
+        playerOnePoints-=1
+        break
+    elsif score.to_i==2
+        playerTwoPoints-=1
+        break
+    else
+        puts "retype 1 or 2:"
+        score=gets
+    end
+   end
+  end
 
 
   # check if no sets are possible
