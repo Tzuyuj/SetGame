@@ -1,10 +1,11 @@
-# Author: Matthew Nehez and Akul Gulrajani
+# Authors: Matthew Nehez and Akul Gulrajani
 
 # This creates an object of class Card that determines the attributes
 # of each card
 class Card
   attr_accessor :color, :number, :fill, :shape
 
+  # constructor method for a card object
   def initialize(color, number, fill, shape)
     @color = color
     @number = number
@@ -12,11 +13,13 @@ class Card
     @shape = shape
   end
 
+  # re-implemented equality operator for card objects so they can be compared
   def ==(other)
     @color == other.color && @number == other.number && @fill == other.fill &&
       @shape == other.shape
   end
 
+  # prints the card's attributes for the user to see
   def display
     puts "#{@number} #{color} #{fill} #{shape}"
   end

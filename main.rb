@@ -3,17 +3,16 @@
 require_relative 'card'
 require_relative 'deck'
 
-deck_of_cards = Deck.new
-play = true
-
-player_one_points = 0
-player_two_points = 0
-
 # deal cards here
+deck_of_cards = Deck.new
 user_cards = deck_of_cards.deal(12)
+card_one_index, card_two_index, card_three_index = nil
 card_one, card_two, card_three = nil
 
-# start game loops here
+# start game loops here and intialize necessary variables
+player_one_points = 0
+player_two_points = 0
+play = true
 while play
   unless deck_of_cards.set?(deck_of_cards, user_cards)
     if deck_of_cards.size >= 3
@@ -34,39 +33,39 @@ while play
   # get first card of user input
   puts "\nChoose a card from the #{user_cards.length} cards above: "
   loop do
-    card_one = gets
-    card_one = card_one.to_i - 1
-    unless card_one.between?(0, user_cards.length - 1)
+    card_one_index = gets
+    card_one_index = card_one_index.to_i - 1
+    unless card_one_index.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end
     break if valid_input
   end
-  card_one = user_cards[card_one]
+  card_one = user_cards[card_one_index]
   # get second card of user input
   puts "Choose another card from the #{user_cards.length}: "
   loop do
-    card_two = gets
-    card_two = card_two.to_i - 1
-    unless card_two.between?(0, user_cards.length - 1)
+    card_two_index = gets
+    card_two_index = card_two_index.to_i - 1
+    unless card_two_index.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end
     break if valid_input
   end
-  card_two = user_cards[card_two]
+  card_two = user_cards[card_two_index]
   # get third card of user input
   puts "Choose another card from the #{user_cards.length}: "
   loop do
-    card_three = gets
-    card_three = card_three.to_i - 1
-    unless card_three.between?(0, user_cards.length - 1)
+    card_three_index = gets
+    card_three_index = card_three_index.to_i - 1
+    unless card_three_index.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end
     break if valid_input
   end
-  card_three = user_cards[card_three]
+  card_three = user_cards[card_three_index]
 
   # perform card check (the check method returns the correct third
   # card and then compares it to the user's third card)
@@ -91,9 +90,9 @@ while play
     # check if there are enough cards to replace them,
     # otherwise the game ends
     if deck_of_cards.size >= 3
-      user_cards[card_one] = deck_of_cards.deal(1)
-      user_cards[card_two] = deck_of_cards.deal(1)
-      user_cards[card_three] = deck_of_cards.deal(1)
+      user_cards[card_one_index] = deck_of_cards.deal(1)
+      user_cards[card_two_index] = deck_of_cards.deal(1)
+      user_cards[card_three_index] = deck_of_cards.deal(1)
     else
       puts 'No more cards, left. GAME OVER!'
       play = false

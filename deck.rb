@@ -1,4 +1,4 @@
-# Author: Akul Gulrajani and Matt Nehez and Bright Zhou
+# Authors: Akul Gulrajani and Matt Nehez and Bright Zhou
 require_relative 'card'
 
 # This class creates an array representation of a deck of cards
@@ -70,15 +70,14 @@ class Deck
   end
 
   # method for checking if there is a set in the user_cards array
-  def set?(deck_of_cards, user_cards)
+  def set?(user_cards)
     user_cards.length.times do |i|
       user_cards.length.times do |j|
         next if i == j
 
         card_one = user_cards[i]
         card_two = user_cards[j]
-        return true if user_cards.include?(deck_of_cards.check(card_one,
-                                                               card_two))
+        return true if user_cards.include?(check(card_one, card_two))
       end
     end
     false
