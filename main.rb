@@ -36,7 +36,7 @@ while play
   loop do
     card_one = gets
     card_one = card_one.to_i - 1
-    unless card_one.between?(0, 11)
+    unless card_one.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end
@@ -48,7 +48,7 @@ while play
   loop do
     card_two = gets
     card_two = card_two.to_i - 1
-    unless card_two.between?(0, 11)
+    unless card_two.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end
@@ -60,7 +60,7 @@ while play
   loop do
     card_three = gets
     card_three = card_three.to_i - 1
-    unless card_three.between?(0, 11)
+    unless card_three.between?(0, user_cards.length - 1)
       valid_input = false
       puts 'Invalid input, please choose a valid card: '
     end

@@ -32,7 +32,7 @@ class Deck
   # Deals the given number of cards
   def deal(number)
     cards_to_deal = []
-    number.times do |i|
+    number.times do
       card_to_deal = @cards.shift
       cards_to_deal.push(card_to_deal)
     end
@@ -74,10 +74,11 @@ class Deck
     user_cards.length.times do |i|
       user_cards.length.times do |j|
         next if i == j
+
         card_one = user_cards[i]
         card_two = user_cards[j]
         return true if user_cards.include?(deck_of_cards.check(card_one,
-                                                        card_two))
+                                                               card_two))
       end
     end
     false
