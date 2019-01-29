@@ -19,7 +19,7 @@ start_time = Time.now
 current_time = Time.new
 testing_time_calc = current_time.to_i - start_time.to_i
 while play
-  unless deck_of_cards.set?(deck_of_cards, user_cards)
+  unless deck_of_cards.set? ( user_cards)
     if deck_of_cards.size >= 3
       puts 'Set not found, three more cards being added'
       user_cards += deck_of_cards.deal(3)
@@ -38,6 +38,7 @@ while play
   # get first card of user input
   puts "\nChoose a card from the #{user_cards.length} cards above: "
   loop do
+    valid_input = true 
     card_one_index = gets
     card_one_index = card_one_index.to_i - 1
     unless card_one_index.between?(0, user_cards.length - 1)
@@ -50,6 +51,7 @@ while play
   # get second card of user input
   puts "Choose another card from the #{user_cards.length}: "
   loop do
+    valid_input = true 
     card_two_index = gets
     card_two_index = card_two_index.to_i - 1
     unless card_two_index.between?(0, user_cards.length - 1)
@@ -62,6 +64,7 @@ while play
   # get third card of user input
   puts "Choose another card from the #{user_cards.length}: "
   loop do
+    valid_input = true  
     card_three_index = gets
     current_time = Time.now
     card_three_index = card_three_index.to_i - 1
@@ -103,9 +106,11 @@ while play
       user_cards[card_two_index] = deck_of_cards.deal(1)
       user_cards[card_three_index] = deck_of_cards.deal(1)
     else
-      puts 'No more cards, left. GAME OVER!'
+      puts "No more cards, left. GAME OVER!\n"
       play = false
     end
+  else 
+    puts 'Not a Set, try again!' 
   end
 end
 end_time = Time.now
