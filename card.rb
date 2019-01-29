@@ -12,6 +12,11 @@ class Card
     @shape = shape
   end
 
+  def ==(other)
+    @color == other.color && @number == other.number && @fill == other.fill &&
+      @shape == other.shape
+  end
+
   def display
     puts "#{@number} #{color} #{fill} #{shape}"
   end

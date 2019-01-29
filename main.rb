@@ -15,8 +15,9 @@ card_one, card_two, card_three = nil
 
 # start game loops here
 while play
-  unless deck_of_cards.set?(user_cards)
+  unless deck_of_cards.set?(deck_of_cards, user_cards)
     if deck_of_cards.size >= 3
+      puts 'Set not found, three more cards being added'
       user_cards += deck_of_cards.deal(3)
     else
       puts 'No more cards left, game over'
@@ -24,11 +25,16 @@ while play
       break
     end
   end
+  # displays the cards
+  user_cards.length.times do |i|
+    print "#{i + 1}. "
+    card_to_deal.display
+  end
   valid_input = true
   # get first card of user input
-  puts "\n" + 'Choose a card from the 12 above: '
+  puts "\nChoose a card from the #{user_cards.length} cards above: "
   loop do
-    card_one = '1'
+    card_one = gets
     card_one = card_one.to_i - 1
     unless card_one.between?(0, 11)
       valid_input = false
@@ -38,9 +44,9 @@ while play
   end
   card_one = user_cards[card_one]
   # get second card of user input
-  puts 'Choose another card: '
+  puts "Choose another card from the #{user_cards.length}: "
   loop do
-    card_two = '2'
+    card_two = gets
     card_two = card_two.to_i - 1
     unless card_two.between?(0, 11)
       valid_input = false
@@ -50,9 +56,9 @@ while play
   end
   card_two = user_cards[card_two]
   # get third card of user input
-  puts 'Choose another card'
+  puts "Choose another card from the #{user_cards.length}: "
   loop do
-    card_three = '3'
+    card_three = gets
     card_three = card_three.to_i - 1
     unless card_three.between?(0, 11)
       valid_input = false
@@ -66,7 +72,7 @@ while play
   # card and then compares it to the user's third card)
   if card_three == deck_of_cards.check(card_one, card_two)
     puts 'That is a set, you get a point!'
-    puts 'who wins the point? Type in 1 or 2:'
+    puts 'Who wins the point? Type in 1 or 2:'
     score = gets
     valid_input = true
     while valid_input
@@ -77,7 +83,7 @@ while play
         player_two_points += 1
         valid_input = false
       else
-        puts 'retype 1 or 2:'
+        puts 'Retype 1 or 2:'
         score = gets
       end
     end
@@ -92,7 +98,7 @@ while play
       puts 'No more cards, left. GAME OVER!'
       play = false
     end
-  end 
+  end
 end
 
 # announce the winner

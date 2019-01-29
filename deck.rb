@@ -34,8 +34,6 @@ class Deck
     cards_to_deal = []
     number.times do |i|
       card_to_deal = @cards.shift
-      print "#{i + 1}. "
-      card_to_deal.display
       cards_to_deal.push(card_to_deal)
     end
     cards_to_deal
@@ -72,44 +70,16 @@ class Deck
   end
 
   # method for checking if there is a set in the user_cards array
-  def set?(user_cards)
-    loop_counter_one = 0
-    loop_counter_two = 1
-    while loop_counter_one < user_cards.length
-      while loop_counter_two < user_cards.length
-        unless loop_counter_one == loop_counter_two
-          if user_cards.include?(check(user_cards[loop_counter_one],
-                                       user_cards[loop_counter_two]))
-            return true
-          end
-        end
-        loop_counter_two += 1
+  def set?(deck_of_cards, user_cards)
+    user_cards.length.times do |i|
+      user_cards.length.times do |j|
+        next if i == j
+        card_one = user_cards[i]
+        card_two = user_cards[j]
+        return true if user_cards.include?(deck_of_cards.check(card_one,
+                                                        card_two))
       end
-      loop_counter_one += 1
     end
     false
   end
 end
-
-# has_set = false
-# card1 = nil
-# card2 = nil
-# card3 = nil
-# while user_cards.length.empty?
-#   card1 = user_cards.shift
-#   i = 0
-#   while user_cards[i]
-#     j = i + 1
-#     while user_cards[j]
-#       card2 = user_cards[i]
-#       card3 = user_cards[j]
-#       # puts "card1:#{card1} card2:#{card2} card3:#{card3}"
-#       if card1.nil? && card2.nil? && card3.nil?
-#         return true
-#       end
-#       j += 1
-#     end
-#     i += 1
-#   end
-# end
-# has_set
