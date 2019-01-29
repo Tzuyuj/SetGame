@@ -11,13 +11,11 @@ Team Members:
 Installation instructions:
 * Go to the workspace directory
 * In the terminal, use the commands:
-  ... 
   ```
-  chmod +x ./gui.sh`
-  ./gui.sh`
+  chmod +x ./gui.sh
+  ./gui.sh
+  ruby app.rb
   ```
-
-* 
 
 
 
