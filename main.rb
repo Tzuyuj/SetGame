@@ -6,8 +6,6 @@ require_relative 'deck'
 # deal cards here
 deck_of_cards = Deck.new
 user_cards = deck_of_cards.deal(12)
-card_one_index, card_two_index, card_three_index = nil
-card_one, card_two, card_three = nil
 
 # start game loops here and intialize necessary variables
 player_one_points = 0
