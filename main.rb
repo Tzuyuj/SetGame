@@ -28,7 +28,7 @@ while play
   # displays the cards
   user_cards.length.times do |i|
     print "#{i + 1}. "
-    card_to_deal.display
+    user_cards[i].display
   end
   valid_input = true
   # get first card of user input
