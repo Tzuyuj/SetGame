@@ -73,30 +73,43 @@ class Deck
 
   # method for checking if there is a set in the user_cards array
   def set?(user_cards)
-    ret_value = false
-    card1 = nil
-    card2 = nil
-    card3 = nil
-    a = []
-    while a.length.empty?
-      card1 = a.shift
-      i = 0
-      while a[i]
-        j = i + 1
-        while a[j]
-          card2 = a[i]
-          card3 = a[j]
-          boo1 = (card1.nil? && card2.nil? && card3.nil?)
-          # puts "card1:#{card1} card2:#{card2} card3:#{card3}"
-          if boo1
-            boo2 = (card1 == check(card2, card3))
-            return boo2
+    loop_counter_one = 0
+    loop_counter_two = 1
+    while loop_counter_one < user_cards.length
+      while loop_counter_two < user_cards.length
+        unless loop_counter_one == loop_counter_two
+          if user_cards.include?(check(user_cards[loop_counter_one],
+                                       user_cards[loop_counter_two]))
+            return true
           end
-          j += 1
         end
-        i += 1
+        loop_counter_two += 1
       end
+      loop_counter_one += 1
     end
-    ret_value
+    false
   end
 end
+
+# has_set = false
+# card1 = nil
+# card2 = nil
+# card3 = nil
+# while user_cards.length.empty?
+#   card1 = user_cards.shift
+#   i = 0
+#   while user_cards[i]
+#     j = i + 1
+#     while user_cards[j]
+#       card2 = user_cards[i]
+#       card3 = user_cards[j]
+#       # puts "card1:#{card1} card2:#{card2} card3:#{card3}"
+#       if card1.nil? && card2.nil? && card3.nil?
+#         return true
+#       end
+#       j += 1
+#     end
+#     i += 1
+#   end
+# end
+# has_set
