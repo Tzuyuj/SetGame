@@ -2,6 +2,8 @@
 
 require_relative 'card'
 require_relative 'deck'
+require 'time.rb'
+stopwatch = 0 # initializing
 
 # deal cards here
 deck_of_cards = Deck.new
@@ -13,6 +15,9 @@ card_one, card_two, card_three = nil
 player_one_points = 0
 player_two_points = 0
 play = true
+start_time = Time.now
+current_time = Time.new
+testing_time_calc = current_time.to_i - start_time.to_i
 while play
   unless deck_of_cards.set?(deck_of_cards, user_cards)
     if deck_of_cards.size >= 3
@@ -58,6 +63,7 @@ while play
   puts "Choose another card from the #{user_cards.length}: "
   loop do
     card_three_index = gets
+    current_time = Time.now
     card_three_index = card_three_index.to_i - 1
     unless card_three_index.between?(0, user_cards.length - 1)
       valid_input = false
@@ -71,6 +77,9 @@ while play
   # card and then compares it to the user's third card)
   if card_three == deck_of_cards.check(card_one, card_two)
     puts 'That is a set, you get a point!'
+    # calculate time to find set
+    stopwatch = current_time.to_i - start_time.to_i
+    puts "The set was found in #{stopwatch} seconds."
     puts 'Who wins the point? Type in 1 or 2:'
     score = gets
     valid_input = true
@@ -99,7 +108,8 @@ while play
     end
   end
 end
-
+end_time = Time.now
+total_time = end_time.to_i - start_time.to_i
 # announce the winner
 if player_one_points > player_two_points
   puts 'player 1, you win!'
@@ -108,3 +118,4 @@ elsif player_one_points < player_two_points
 else
   puts 'It\'s a tie!'
 end
+puts "The game lasted #{total_time} seconds."
