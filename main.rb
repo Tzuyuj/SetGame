@@ -7,9 +7,6 @@ require 'time.rb'
 # deal cards here
 deck_of_cards = Deck.new
 user_cards = deck_of_cards.deal(12)
-user_cards.push(Card.new("BLUE", 1, "STRIPED", "SQUIGGLE"))
-user_cards.push(Card.new("BLUE", 1, "STRIPED", "OVAL"))
-user_cards.push(Card.new("BLUE", 1, "STRIPED", "DIAMOND"))
 card_one_index, card_two_index, card_three_index = nil
 
 # start game loops here and intialize necessary variables
@@ -40,7 +37,7 @@ while play
   puts "\nChoose a card from the #{user_cards.length} cards above: "
   loop do
     valid_input = true
-    card_one_index = '13'
+    card_one_index = gets
     card_one_index = card_one_index.to_i - 1
     unless card_one_index.between?(0, user_cards.length - 1)
       valid_input = false
@@ -53,7 +50,7 @@ while play
   puts "Choose another card from the #{user_cards.length} cards above: "
   loop do
     valid_input = true
-    card_two_index = '14'
+    card_two_index = gets
     card_two_index = card_two_index.to_i - 1
     if !card_two_index.between?(0, user_cards.length - 1) ||
        card_one_index == card_two_index
@@ -67,7 +64,7 @@ while play
   puts "Choose another card from the #{user_cards.length} cards above: "
   loop do
     valid_input = true
-    card_three_index = '15'
+    card_three_index = gets
     card_three_index = card_three_index.to_i - 1
     if !card_three_index.between?(0, user_cards.length - 1) ||
        card_one_index == card_three_index || card_two_index == card_three_index
@@ -87,7 +84,7 @@ while play
     stopwatch = current_time.to_i - start_loop_time.to_i
     puts "The set was found in #{stopwatch} seconds."
     puts 'Who wins the point? Type in 1 or 2:'
-    score = '1'
+    score = gets
     valid_input = true
     while valid_input
       if score.to_i == 1
