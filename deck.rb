@@ -65,8 +65,8 @@ class Deck
     else
       card_three_shape = (@shapes - [card_one.shape, card_two.shape])[0]
     end
-    card_three = Card.new(card_three_color, card_three_number,
-                          card_three_fill, card_three_shape)
+    Card.new(card_three_color, card_three_number,
+             card_three_fill, card_three_shape)
   end
 
   # method for checking if there is a set in the user_cards array
