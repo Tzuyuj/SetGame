@@ -1,12 +1,11 @@
 require 'ruby2d'
 
-set title: 'Hello Triangle'
+set title: 'Game of Set', background: 'silver', width: 1000, height: 1000,
+    resizable: true
 
-Triangle.new(
-  x1: 320, y1:  50,
-  x2: 540, y2: 430,
-  x3: 100, y3: 430,
-  color: %w[red blue green]
-)
-
+Main.new
+Main.start_game
+update do
+  # add loop body
+end
 show
