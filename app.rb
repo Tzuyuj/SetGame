@@ -1,4 +1,4 @@
-require 'ruby-2d'
+require 'ruby2d'
 
 set title: 'Hello Triangle'
 
