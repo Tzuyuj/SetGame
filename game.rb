@@ -4,8 +4,8 @@ require_relative 'card'
 require_relative 'deck'
 require 'time.rb'
 
-# Controller class for game
-class Main
+# Controller class for Game of Set to be played
+class Game
   # initializes all necessary variables for game to be played
   def initialize
     # deal cards here
