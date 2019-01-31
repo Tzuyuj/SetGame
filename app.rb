@@ -1,11 +1,25 @@
-require 'ruby2d'
+# Author: Akul Gulrajani
+require 'gtk2'
 
-set title: 'Game of Set', background: 'silver', width: 1000, height: 1000,
-    resizable: true
+button = Gtk::Button.new('Hello World')
+button.signal_connect('clicked') {
+  puts 'Hello World'
+}
 
-Main.new
-Main.start_game
-update do
-  # add loop body
-end
-show
+window = Gtk::Window.new('Hello World sample')
+window.signal_connect('delete_event') {
+  puts 'delete event occurred'
+  # true
+  false
+}
+
+window.signal_connect('destroy') {
+  puts 'destroy event occurred'
+  Gtk.main_quit
+}
+
+window.border_width = 10
+window.add(button)
+window.show_all
+
+Gtk.main

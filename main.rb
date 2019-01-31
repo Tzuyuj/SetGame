@@ -23,7 +23,7 @@ class Main
     start_time = Time.new
     while @play
       start_loop_time = Time.new
-      unless @deck_of_cards.set?(user_cards)
+      unless @deck_of_cards.set?(@user_cards)
         if @deck_of_cards.size >= 3
           puts 'Set not found, three more cards being added'
           @user_cards.concat(@deck_of_cards.deal(3))
