@@ -24,9 +24,9 @@ window.signal_connect('destroy') do
 end
 
 window.border_width = 10
-box1 = Gtk::HBox.new(false, 0)
+box1 = Gtk::VBox.new(false, 0)
 window.add(box1)
-box1.pack_start(button, true, true, 0)
+box1.pack_start(button, true, true, 3)
 box1.pack_start(quit_button, true, true, 0)
 window.show_all
 
