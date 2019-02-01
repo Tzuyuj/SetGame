@@ -1,7 +1,6 @@
 # Author: Akul Gulrajani
 require 'gtk2'
 require_relative 'game'
-require_relative 'helper'
 
 # initialize window
 window = Gtk::Window.new('The Game of Set')
@@ -26,6 +25,14 @@ window_box = Gtk::VBox.new(false, 0)
 window_box.pack_start(card_table, true, true, 0)
 window_box.pack_start(quit_button, false, false, 0)
 
+textview = Gtk::TextView.new
+textview.buffer.text = "cat"
+catImage = Gdk::Pixbuf.new("cat.jpeg")
+iter = textview.buffer.get_iter_at_line(0)
+textview.buffer.insert_pixbuf(iter, catImage)
+
+
+window.add(textview)
 window.add(card_table)
 # box1 = Gtk::VBox.new(false, 0)
 # window.add(box1)
