@@ -1,5 +1,7 @@
 # Authors: Matthew Nehez and Akul Gulrajani
 
+require 'gtk2'
+
 # This creates an object of class Card that determines the attributes
 # of each card
 class Card
@@ -14,7 +16,7 @@ class Card
   end
 
   def image
-    "img/#{@color[0]}+#{@number}+#{@fill[0]} + #{@shape[0]}.jpg"
+    Gtk::Image.new("img/#{@color[0]}+#{@number}+#{@fill[0]} + #{@shape[0]}.jpg")
   end
 
   # re-implemented equality operator for card objects so they can be compared
