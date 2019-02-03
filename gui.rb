@@ -20,7 +20,7 @@ class GUI
     add_cards(table, 4, game.user_cards)
 
     # add Timer
-    timer = Gtk::Label.new('Timer')
+    timer = Gtk::Lib.new('Timer')
     table.attach_defaults(timer, 4, 6, 0, 1)
 
     # add Player points
@@ -31,8 +31,15 @@ class GUI
     button = Gtk::Button.new('Quit')
     button.signal_connect('clicked') do
       puts 'Quit button pressed, goodbye!'
+      timer.stop()
       Gtk.main_quit
     end
+
+  def set_found
+    # if a set is found then stop the clock before congratulating the player and resettling the board
+    timer.stop()
+    end
+
 
     # initialize windows and tables
     table.attach_defaults(button, 4, 6, 3, 4)
@@ -60,6 +67,12 @@ class GUI
     
 #        button.set_image = user_cards[(3 * i) + j].image
 #        button.signal_connect('toggled') { |w| toggle_em(w, button) }
+        button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
+        table.attach_defaults(button, j, j + 1, i, i + 1)
+        button.set_image = user_cards[(3 * i) + j].image
+        button.signal_connect('toggled') { |w| toggle_em(w, button) }
+        # start timer again after redealing cards
+        timer.continue()
       end
     end
   end
