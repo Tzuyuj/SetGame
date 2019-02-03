@@ -49,10 +49,17 @@ class GUI
   def add_cards(table, number_of_rows, user_cards)
     number_of_rows.times do |i|
       3.times do |j|
-        button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
-        table.attach_defaults(button, j, j + 1, i, i + 1)
-        button.set_image = user_cards[(3 * i) + j].image
-        button.signal_connect('toggled') { |w| toggle_em(w, button) }
+        
+        button = Gtk::EventBox.new.add(user_cards[(3 * i) + j].image)
+	#button.signal_connect("button_press_event") do
+	
+	#end
+
+        #button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
+        table.attach(button, j, j + 1, i, i + 1)
+    
+#        button.set_image = user_cards[(3 * i) + j].image
+#        button.signal_connect('toggled') { |w| toggle_em(w, button) }
       end
     end
   end
