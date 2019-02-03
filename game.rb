@@ -7,6 +7,8 @@ require 'time.rb'
 # Controller class for Game of Set to be played
 class Game
   # initializes all necessary variables for game to be played
+  attr_accessor :deck_of_cards, :user_cards
+
   def initialize
     # deal cards here
     @deck_of_cards = Deck.new
