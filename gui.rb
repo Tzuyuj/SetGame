@@ -15,17 +15,17 @@ class GUI
     end
 
     # initialize boxes and tables
-    table = Gtk::Table.new(4, 6, true)
+    table = Gtk::Table.new(4, 5, true)
     window.add(table)
     add_cards(table, 4)
 
     # add Timer button
     timer = Gtk::Label.new('Timer')
-    table.attach_defaults(timer, 4, 6, 0, 1)
+    table.attach_defaults(timer, 4, 5, 0, 1)
 
     # add Player points button
     scoreboard = Gtk::Label.new("Player1 points: \n \n Player2 points: ")
-    table.attach_defaults(scoreboard, 4, 6, 1, 3)
+    table.attach_defaults(scoreboard, 4, 5, 1, 3)
 
     # add Quit button
     button = Gtk::Button.new('Quit')
@@ -34,7 +34,7 @@ class GUI
       Gtk.main_quit
     end
     # initialize windows and tables
-    table.attach_defaults(button, 0, 6, 3, 4)
+    table.attach_defaults(button, 4, 5, 3, 4)
     window.show_all
 
     Gtk.main
