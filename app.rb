@@ -2,7 +2,6 @@
 require 'gtk2'
 require_relative 'game'
 
-
 # initialize window
 window = Gtk::Window.new('The Game of Set')
 window.set_default_size(700, 700)
@@ -11,15 +10,12 @@ window.signal_connect('destroy') do
   puts 'destroy event occurred'
   Gtk.main_quit
 end
-game = Game.new
+# game = Game.new
 
-
-
-
-catImage = Gtk::Image.new("cat.jpeg")
-event_box = Gtk::EventBox.new.add(catImage)
-event_box.signal_connect("button_press_event") do
- puts "Clicked"
+cat_image = Gtk::Image.new('cat.jpeg')
+event_box = Gtk::EventBox.new.add(cat_image)
+event_box.signal_connect('button_press_event') do
+  puts 'Clicked'
 end
 
 # initialize boxes and tables
@@ -35,10 +31,10 @@ window_box = Gtk::VBox.new(false, 0)
 window_box.pack_start(card_table, true, true, 0)
 window_box.pack_start(quit_button, false, false, 0)
 
-#textview.buffer.insert_pixbuf(iter, catImage)
+# textview.buffer.insert_pixbuf(iter, catImage)
 
 window.add(event_box)
-#window.add(window_box)
+# window.add(window_box)
 # box1 = Gtk::VBox.new(false, 0)
 # window.add(box1)
 # box1.pack_start(button, true, true, 3)
