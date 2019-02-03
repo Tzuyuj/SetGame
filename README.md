@@ -13,7 +13,7 @@ Installation instructions:
 * In the terminal, use the commands (using your password for the sudo commands and pressing y to continue installations as needed):
   ```
   gem install gtk2
-  ruby main.rb
+  ruby app.rb
   ```
 
 

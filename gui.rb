@@ -17,8 +17,7 @@ class GUI
     # initialize boxes and tables
     table = Gtk::Table.new(4, 6, true)
     window.add(table)
-
-    add_cards(12)
+    add_cards(table, 4)
 
     # add Timer button
     timer = Gtk::Label.new('Timer')
@@ -47,12 +46,14 @@ class GUI
     other_tgg.sensitive = widget.active? ? false : true
   end
 
-  # add 12 cards
-  def add_cards(number_of_cards)
-    (1..number_of_cards).each do |i|
-      button = Gtk::ToggleButton.new("card #{i}")
-      table.attach_defaults(button, i - 1, i, 0, 1)
-      button.signal_connect('toggled') { |w| toggle_em(w, button) }
+  # add cards in rows of 3 with the specified number of rows
+  def add_cards(table, number_of_rows)
+    number_of_rows.times do |i|
+      3.times do |j|
+        button = Gtk::ToggleButton.new("card #{i + j}")
+        table.attach_defaults(button, j, j + 1, i, i + 1)
+        button.signal_connect('toggled') { |w| toggle_em(w, button) }
+      end
     end
   end
 end
