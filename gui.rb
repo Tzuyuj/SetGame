@@ -15,17 +15,17 @@ class GUI
     end
 
     # initialize boxes and tables
-    table = Gtk::Table.new(4, 5, true)
+    table = Gtk::Table.new(4, 6, true)
     window.add(table)
     add_cards(table, 4)
 
-    # add Timer button
+    # add Timer
     timer = Gtk::Label.new('Timer')
-    table.attach_defaults(timer, 4, 5, 0, 1)
+    table.attach_defaults(timer, 4, 6, 0, 1)
 
-    # add Player points button
+    # add Player points
     scoreboard = Gtk::Label.new("Player1 points: \n \n Player2 points: ")
-    table.attach_defaults(scoreboard, 4, 5, 1, 3)
+    table.attach_defaults(scoreboard, 4, 6, 1, 3)
 
     # add Quit button
     button = Gtk::Button.new('Quit')
@@ -34,7 +34,7 @@ class GUI
       Gtk.main_quit
     end
     # initialize windows and tables
-    table.attach_defaults(button, 4, 5, 3, 4)
+    table.attach_defaults(button, 4, 6, 3, 4)
     window.show_all
 
     Gtk.main
@@ -50,7 +50,7 @@ class GUI
   def add_cards(table, number_of_rows)
     number_of_rows.times do |i|
       3.times do |j|
-        button = Gtk::ToggleButton.new("card #{i + j}")
+        button = Gtk::ToggleButton.new("card #{i + j + 1}")
         table.attach_defaults(button, j, j + 1, i, i + 1)
         button.signal_connect('toggled') { |w| toggle_em(w, button) }
       end
