@@ -20,8 +20,8 @@ class GUI
     add_cards(table, 4, game.user_cards)
 
     # add Timer
-    timer = Gtk::Lib.new('Timer')
-    table.attach_defaults(timer, 4, 6, 0, 1)
+#    timer = Gtk::GLib.new('Timer')
+#    table.attach_defaults(timer, 4, 6, 0, 1)
 
     # add Player points
     scoreboard = Gtk::Label.new("Player1 points: \n \n Player2 points: ")
@@ -62,17 +62,13 @@ class GUI
 	
 	#end
 
-        #button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
+       # button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
         table.attach(button, j, j + 1, i, i + 1)
     
-#        button.set_image = user_cards[(3 * i) + j].image
-#        button.signal_connect('toggled') { |w| toggle_em(w, button) }
-        button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
-        table.attach_defaults(button, j, j + 1, i, i + 1)
-        button.set_image = user_cards[(3 * i) + j].image
-        button.signal_connect('toggled') { |w| toggle_em(w, button) }
+       # button.set_image (user_cards[(3 * i) + j].image) 
+       # button.signal_connect('toggled') { |w| toggle_em(w, button) }
         # start timer again after redealing cards
-        timer.continue()
+ #       timer.continue()
       end
     end
   end
