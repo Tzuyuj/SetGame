@@ -5,7 +5,7 @@ require_relative 'game'
 # insert comment here
 class GUI
   # initialize window and other necessary attributes
-  def initialize
+  def initialize(game)
     window = Gtk::Window.new('The Game of Set')
     window.set_default_size(700, 700)
     window.border_width = 10
@@ -17,7 +17,7 @@ class GUI
     # initialize boxes and tables
     table = Gtk::Table.new(4, 6, true)
     window.add(table)
-    add_cards(table, 4)
+    add_cards(table, 4, game.user_cards)
 
     # add Timer
     timer = Gtk::Label.new('Timer')
@@ -33,12 +33,11 @@ class GUI
       puts 'Quit button pressed, goodbye!'
       Gtk.main_quit
     end
+
     # initialize windows and tables
     table.attach_defaults(button, 4, 6, 3, 4)
     window.show_all
-
     Gtk.main
-    game = Game.new
   end
 
   def toggle_em(widget, other_tgg)
@@ -47,11 +46,12 @@ class GUI
   end
 
   # add cards in rows of 3 with the specified number of rows
-  def add_cards(table, number_of_rows)
+  def add_cards(table, number_of_rows, user_cards)
     number_of_rows.times do |i|
       3.times do |j|
-        button = Gtk::ToggleButton.new("card #{i + j + 1}")
+        button = Gtk::ToggleButton.new("card #{(3 * i) + j + 1}")
         table.attach_defaults(button, j, j + 1, i, i + 1)
+        button.set_image = user_cards[(3 * i) + j].image
         button.signal_connect('toggled') { |w| toggle_em(w, button) }
       end
     end

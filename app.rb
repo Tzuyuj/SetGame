@@ -3,4 +3,5 @@ require 'gtk2'
 require_relative 'gui'
 require_relative 'game'
 
-gui = GUI.new
+game = Game.new
+gui = GUI.new(game)

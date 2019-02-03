@@ -13,6 +13,10 @@ class Card
     @shape = shape
   end
 
+  def image
+    "img/#{@color[0]}+#{@number}+#{@fill[0]} + #{@shape[0]}.jpg"
+  end
+
   # re-implemented equality operator for card objects so they can be compared
   def ==(other)
     @color == other.color && @number == other.number && @fill == other.fill &&
