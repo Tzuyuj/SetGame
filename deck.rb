@@ -29,7 +29,7 @@ class Deck
     @cards.length
   end
 
-  # Deals the given number of cards
+  # Deals the given number of cards in an array
   def deal(number)
     cards_to_deal = []
     number.times do

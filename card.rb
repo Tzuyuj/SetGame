@@ -16,8 +16,7 @@ class Card
   end
 
   def image
-  #Gtk::Image.new("img/B3SS.jpg")  
-  Gtk::Image.new("img/#{@color[0]}#{@number}#{@fill[0]}#{@shape[0]}.jpg") 
+    Gtk::Image.new("img/#{@color[0]}#{@number}#{@fill[0]}#{@shape[0]}.jpg")
   end
 
   # re-implemented equality operator for card objects so they can be compared
