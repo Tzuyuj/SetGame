@@ -18,15 +18,14 @@ class GUI
     # initialize boxes and tables
     @table = Gtk::Table.new(4, 6, true)
     window.add(@table)
+
     # set up starting board of 12 cards
     4.times do |i|
       3.times do |j|
-        button = Gtk::EventBox.new.add(game.user_cards[(3 * i) + j].image)
-        button.signal_connect('button_press_event') do
-          # something with user_cards[(3 * i) + j]
-          # or something with returning the table's coordinates, idk
-          # make button gray
-          button.modify_bg(Gtk::STATE_ACTIVE, Gdk::Color.parse('#A9A9A9'))
+        button = Gtk::Button.new
+        button.image = game.user_cards[(3 * i) + j].image
+        button.signal_connect('clicked') do
+          # something with returning the table's coordinates
         end
         @table.attach_defaults(button, j, j + 1, i, i + 1)
         # start timer again after redealing cards
@@ -38,7 +37,8 @@ class GUI
     # timer = GLib::Timer.new('Timer') #line 40
     # timerbox = Glib::Boxed.new
     # timerbutton = Gtk::Button.new
-    # table.attach_defaults(timerbutton, 4, 6, 0, 1)
+    timer = Gtk::Label.new('Timer')
+    table.attach_defaults(timer, 4, 6, 0, 1)
 
     # add Player points
     scoreboard = Gtk::Label.new("Player1 points: \n \n Player2 points: ")
@@ -68,13 +68,12 @@ class GUI
   # how to concat new cards
   def add_cards(user_cards)
     num_rows = 4
-    3.times do |j|
-      button = Gtk::EventBox.new.add(user_cards[(3 * num_rows) + j].image)
-      button.signal_connect('button_press_event') do
+    3.times do |i|
+      button = Gtk::Button.new
+      button.image = user_cards[(3 * num_rows) + i].image
+      button.signal_connect('clicked') do
         puts 'Button in table clicked'
       end
-      button.pressed
-      button.modify_bg(Gtk::STATE_ACTIVE, Gdk::Color.parse('#A9A9A9'))
     end
     @table.attach_defaults(button, j, j + 1, num_rows, num_rows + 1)
   end
