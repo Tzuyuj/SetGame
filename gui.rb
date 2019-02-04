@@ -62,9 +62,14 @@ class GUI
       3.times do |j|
         button = Gtk::Button.new
         button.image = user_cards[(3 * i) + j].image
+        button.state = Gtk::STATE_PRELIGHT #may need STATE_NORMAL but atm any button could be clicked
         button.signal_connect('clicked') do
           # something with returning the table's coordinates
           @user_input.push(image_2_card(button.image))
+          button.set_state(Gtk::STATE_ACTIVE)
+          button.modify_bg(Gtk::STATE_ACTIVE, Gdk::Color.parse("#000000")) # ("#A9A9A9"))
+          button.set_state(Gtk::STATE_INSENSITIVE)
+          button.modify_bg(Gtk::STATE_INSENSITIVE, Gdk::Color.parse("#000000")) # ("#A9A9A9"))
         end
         @table.attach_defaults(button, j, j + 1, i, i + 1)
       end
