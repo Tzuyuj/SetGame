@@ -102,9 +102,9 @@ while game.play
     # check if there are enough cards to replace them,
     # otherwise the game ends
     if game.deck_of_cards.size >= 3
-      game.user_cards[card_one_index] = game.deck_of_cards.deal(1)[0]
-      game.user_cards[card_two_index] = game.deck_of_cards.deal(1)[0]
-      game.user_cards[card_three_index] = game.deck_of_cards.deal(1)[0]
+      game.user_cards[game.user_cards.find_index(card_one)] = game.deck_of_cards.deal(1)[0]
+      game.user_cards[game.user_cards.find_index(card_two)] = game.deck_of_cards.deal(1)[0]
+      game.user_cards[game.user_cards.find_index(card_three)] = game.deck_of_cards.deal(1)[0]
       gui.add_cards(user_cards)
     else
       gui.prompt = Gtk::Label.new("No more cards left. GAME OVER!\n")
