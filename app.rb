@@ -10,22 +10,14 @@ gui = GUI.new(game)
 start_time = Time.new
 while game.play
   start_loop_time = Time.new
-  card_table = gui.table
   unless game.deck_of_cards.set?(game.user_cards)
     if game.deck_of_cards.size >= 3
-      puts 'Set not found, three more cards being added'
+      gui.prompt = Gtk::Label.new('Set not found, three more cards being added')
       new_cards = game.deck_of_cards.deal(3)
-      # 3 is how many cards fit in a row; 3 x num_columns spots
-      num_rows = game.deck_of_cards.size / 3
-      # NOTE THE GUI.ADD_CARDS METHOD CAN'T HANGLE CONCATENATION YET
-      # THIS WILL BREAK THE CODE
-      # CHANGE THIS: gui.add_cards(1, new_cards)
-      # reset board
-      card_table.resize(num_rows, 6)
-      gui.add_cards(new_cards)
       game.user_cards.concat(new_cards)
+      gui.add_cards(user_cards)
     else
-      puts 'No more cards left, game over'
+      gui.prompt = Gtk::Label.new('No more cards left, game over')
       game.play = false
       break
     end
@@ -38,60 +30,61 @@ while game.play
   valid_input = true
   # get first card of user input
   # puts "\nChoose a card from the #{game.user_cards.length} cards above: "
-  loop do
-    valid_input = true
-    card_one_index = gets
-    card_one_index = card_one_index.to_i - 1
-    unless card_one_index.between?(0, game.user_cards.length - 1)
-      valid_input = false
-      puts 'Invalid input, please choose a valid card: '
-    end
-    # GUI interaction code here
-    break if valid_input
-  end
-  card_one = game.user_cards[card_one_index]
+  # loop do
+  #   valid_input = true
+  #   card_one_index =
+  #   card_one_index = card_one_index.to_i - 1
+  #   unless card_one_index.between?(0, game.user_cards.length - 1)
+  #     valid_input = false
+  #     puts 'Invalid input, please choose a valid card: '
+  #   end
+  #   # GUI interaction code here
+  #   break if valid_input
+  # end
+  card_one = gui.user_input[0]
   # get second card of user input
   # puts "Choose another card from the
   # #{game.user_cards.length} cards above: "
-  loop do
-    valid_input = true
-    card_two_index = gets
-    card_two_index = card_two_index.to_i - 1
-    if !card_two_index.between?(0, game.user_cards.length - 1) ||
-       card_one_index == card_two_index
-      valid_input = false
-      puts 'Invalid input, please choose a valid card: '
-    end
-    # GUI interaction code here
-    break if valid_input
-  end
-  card_two = game.user_cards[card_two_index]
+  # loop do
+  #   valid_input = true
+  #   card_two_index = gets
+  #   card_two_index = card_two_index.to_i - 1
+  #   if !card_two_index.between?(0, game.user_cards.length - 1) ||
+  #      card_one_index == card_two_index
+  #     valid_input = false
+  #     puts 'Invalid input, please choose a valid card: '
+  #   end
+  #   # GUI interaction code here
+  #   break if valid_input
+  # end
+  card_two = gui.user_input[1]
   # get third card of user input
   # puts "Choose another card from the #{game.user_cards.length} cards above: "
-  loop do
-    valid_input = true
-    card_three_index = gets
-    card_three_index = card_three_index.to_i - 1
-    if !card_three_index.between?(0, game.user_cards.length - 1) ||
-       card_one_index == card_three_index || card_two_index ==
-       card_three_index
-      valid_input = false
-      puts 'Invalid input, please choose a valid card: '
-    end
-    # GUI interaction code here
-    break if valid_input
-  end
-  card_three = game.user_cards[card_three_index]
+  # loop do
+  #   valid_input = true
+  #   card_three_index = gets
+  #   card_three_index = card_three_index.to_i - 1
+  #   if !card_three_index.between?(0, game.user_cards.length - 1) ||
+  #      card_one_index == card_three_index || card_two_index ==
+  #      card_three_index
+  #     valid_input = false
+  #     puts 'Invalid input, please choose a valid card: '
+  #   end
+  #   # GUI interaction code here
+  #   break if valid_input
+  # end
+  card_three = gui.user_input[2]
   # perform card check (the check method returns the correct third
   # card and then compares it to the user's third card)
   if card_three == game.deck_of_cards.check(card_one, card_two)
-    puts 'That is a set, you get a point!'
+    gui.prompt = Gtk::Label.new('That is a set, you get a point!')
     # calculate time to find set
     current_time = Time.new
     stopwatch = current_time.to_i - start_loop_time.to_i
-    puts "The set was found in #{stopwatch} seconds."
-    puts 'Who wins the point? Type in 1 or 2:'
-    score = gets
+    gui.prompt = Gtk::Label.new("The set was found in #{stopwatch} seconds.")
+    # gui.prompt = Gtk::Label.new('Who wins the point? Type in 1 or 2:')
+    # 1 IS A DUMMY VALUE AND WILL NEED TO BE FIXED AFTER A QUICK TEST
+    score = 1
     valid_input = true
     while valid_input
       if score.to_i == 1
@@ -112,22 +105,23 @@ while game.play
       game.user_cards[card_one_index] = game.deck_of_cards.deal(1)[0]
       game.user_cards[card_two_index] = game.deck_of_cards.deal(1)[0]
       game.user_cards[card_three_index] = game.deck_of_cards.deal(1)[0]
+      gui.add_cards(user_cards)
     else
-      puts "No more cards left. GAME OVER!\n"
+      gui.prompt = Gtk::Label.new("No more cards left. GAME OVER!\n")
       game.play = false
     end
   else
-    puts "Not a Set, try again!\n\n"
+    gui.prompt = Gtk::Label.new("Not a Set, try again!\n\n")
   end
 end
 end_time = Time.now
 total_time = end_time.to_i - start_time.to_i
 # announce the winner
 if game.player_one_points > game.player_two_points
-  puts 'player 1, you win!'
+  gui.prompt = Gtk::Label.new('player 1, you win!')
 elsif game.player_one_points < game.player_two_points
-  puts 'player 2, you win!'
+  gui.prompt = Gtk::Label.new('player 2, you win!')
 else
-  puts 'It\'s a tie!'
+  gui.prompt = Gtk::Label.new('It\'s a tie!')
 end
-puts "The game lasted #{total_time} seconds."
+gui.prompt = Gtk::Label.new("The game lasted #{total_time} seconds.")

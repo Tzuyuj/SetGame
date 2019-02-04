@@ -5,7 +5,8 @@ require_relative 'game'
 # insert comment here
 class GUI
   # initialize window and other necessary attributes
-  attr_accessor :table
+  attr_accessor :table, :user_input, :prompt, :player_one_points,
+                :player_two_points
   def initialize(game)
     window = Gtk::Window.new('The Game of Set')
     window.set_default_size(700, 700)
@@ -18,32 +19,20 @@ class GUI
     # initialize boxes and tables
     @table = Gtk::Table.new(4, 6, true)
     window.add(@table)
+    add_cards(game.user_cards)
 
-    # set up starting board of 12 cards
-    4.times do |i|
-      3.times do |j|
-        button = Gtk::Button.new
-        button.image = game.user_cards[(3 * i) + j].image
-        button.signal_connect('clicked') do
-          # something with returning the table's coordinates
-	  puts button.image.file
-        end
-        @table.attach_defaults(button, j, j + 1, i, i + 1)
-        # start timer again after redealing cards
-        # timer.continue
-      end
-    end
-
-    # add Timer
+    # add Prompt
     # timer = GLib::Timer.new('Timer') #line 40
     # timerbox = Glib::Boxed.new
     # timerbutton = Gtk::Button.new
-    timer = Gtk::Label.new('Timer')
-    table.attach_defaults(timer, 4, 6, 0, 1)
+    @prompt = Gtk::Label.new('Welcome to Set!')
+    table.attach_defaults(@prompt, 4, 6, 0, 1)
 
     # add Player points
-    scoreboard = Gtk::Label.new("Player1 points: \n \n Player2 points: ")
-    @table.attach_defaults(scoreboard, 4, 6, 1, 3)
+    @player_one_point_label = Gtk::Label.new("Player 1 points: #{game.player_one_points}")
+    @player_two_point_label = Gtk::Label.new("Player 2 points: #{game.player_two_points}")
+    @table.attach_defaults(@player_one_point_label, 4, 6, 1, 2)
+    @table.attach_defaults(@player_two_point_label, 4, 6, 2, 3)
 
     # add Quit button
     button = Gtk::Button.new('Quit')
@@ -64,18 +53,35 @@ class GUI
   # timer.stop
   # end
 
-  # add cards in rows of 3 with the specified number of rows
-  # RM: should it be columns of 3?
-  # how to concat new cards
+  # adds cards to the table
   def add_cards(user_cards)
-    num_rows = 4
-    3.times do |i|
-      button = Gtk::Button.new
-      button.image = user_cards[(3 * num_rows) + i].image
-      button.signal_connect('clicked') do
-        puts 'Button in table clicked'
+    num_rows = user_cards.length / 3
+    card_table.resize(num_rows, 6)
+    num_rows.times do |i|
+      3.times do |j|
+        button = Gtk::Button.new
+        button.image = user_cards[(3 * i) + j].image
+        button.signal_connect('clicked') do
+          # something with returning the table's coordinates
+          @user_input.push(image_2_card(button.image))
+        end
+        @table.attach_defaults(button, j, j + 1, i, i + 1)
       end
     end
-    @table.attach_defaults(button, j, j + 1, num_rows, num_rows + 1)
+  end
+
+  # returns a card for the given Gtk image
+  def image_2_card(image)
+    Card.new(image.file[4, 1], image.file[5, 1].to_i, image.file[6, 1],
+             image.file[7, 1])
+  end
+
+  # adds a point to the scoreboard for the given player
+  def update_scoreboard(player)
+    if player == 1
+      @player_one_points_label = Gtk::Label.new("Player 1 points: #{game.player_one_points}")
+    else
+      @player_two_points_label = Gtk::Label.new("Player 2 points: #{game.player_two_points}")
+    end
   end
 end
