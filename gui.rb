@@ -72,8 +72,26 @@ class GUI
 
   # returns a card for the given Gtk image
   def image_2_card(image)
-    Card.new(image.file[4, 1], image.file[5, 1].to_i, image.file[6, 1],
-             image.file[7, 1])
+    color_char = image.file[4, 1]
+    color = case color_char
+            when 'R' then 'RED'
+            when 'B' then 'BLUE'
+            when 'G' then 'GREEN'
+            end
+    number = image.file[5, 1].to_i
+    fill_char = image.file[7, 1]
+    fill = case fill_char
+           when 'E' then 'EMPTY'
+           when 'S' then 'STRIPED'
+           when 'F' then 'SOLID'
+           end
+    shape_char = image.file[6, 1]
+    shape = case shape_char
+            when 'D' then 'DIAMOND'
+            when 'O' then 'OVAL'
+            when 'S' then 'SQUIGGLE'
+            end
+    Card.new(color, number, fill, shape)
   end
 
   # adds a point to the scoreboard for the given player
