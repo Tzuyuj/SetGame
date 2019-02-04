@@ -17,6 +17,7 @@ class GUI
     end
 
     # initialize boxes and tables
+    @user_input = []
     @table = Gtk::Table.new(4, 6, true)
     window.add(@table)
     add_cards(game.user_cards)
@@ -56,7 +57,7 @@ class GUI
   # adds cards to the table
   def add_cards(user_cards)
     num_rows = user_cards.length / 3
-    card_table.resize(num_rows, 6)
+    @table.resize(num_rows, 6)
     num_rows.times do |i|
       3.times do |j|
         button = Gtk::Button.new
