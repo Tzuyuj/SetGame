@@ -26,6 +26,7 @@ class GUI
         button.image = game.user_cards[(3 * i) + j].image
         button.signal_connect('clicked') do
           # something with returning the table's coordinates
+	  puts button.image.file
         end
         @table.attach_defaults(button, j, j + 1, i, i + 1)
         # start timer again after redealing cards
