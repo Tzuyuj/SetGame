@@ -10,18 +10,18 @@ gui = GUI.new(game)
 start_time = Time.new
 while game.play
   start_loop_time = Time.new
-  cardtable = gui.table
+  card_table = gui.table
   unless game.deck_of_cards.set?(game.user_cards)
     if game.deck_of_cards.size >= 3
       puts 'Set not found, three more cards being added'
       new_cards = game.deck_of_cards.deal(3)
-      num_cards = deck.size
-      num_columns = num_cards / 3; # 3 is how many cards fit in a column; 3 x num_columns spots
+      # 3 is how many cards fit in a row; 3 x num_columns spots
+      num_rows = game.deck_of_cards.size / 3
       # NOTE THE GUI.ADD_CARDS METHOD CAN'T HANGLE CONCATENATION YET
       # THIS WILL BREAK THE CODE
       # CHANGE THIS: gui.add_cards(1, new_cards)
       # reset board
-      cardtable.resize(4, num_columns); 
+      card_table.resize(num_rows, 6)
       gui.add_cards(new_cards)
       game.user_cards.concat(new_cards)
     else
