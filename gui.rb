@@ -21,7 +21,7 @@ class GUI
     @table = Gtk::Table.new(4, 6, true)
     window.add(@table)
     add_cards(game.user_cards)
-
+ 
     # add Prompt
     # timer = GLib::Timer.new('Timer') #line 40
     # timerbox = Glib::Boxed.new
